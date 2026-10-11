@@ -47,6 +47,7 @@ async def root():
     }
 
 
+@app.get("/health", response_model=HealthResponse, tags=["Health"])
 @app.get("/api/v1/health", response_model=HealthResponse, tags=["Health"])
 async def health_check():
     has_dataset = os.path.exists(B0005_CSV)

@@ -1,15 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "src/thermoscope/api/main.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "src/thermoscope/api/main.py"
+      "source": "/(.*)",
+      "destination": "/api/index.py"
     }
   ]
 }
