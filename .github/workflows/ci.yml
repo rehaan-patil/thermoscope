@@ -1,0 +1,53 @@
+name: ThermoScope CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-statistical-engine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r apps/api/requirements.txt
+          pip install pytest httpx
+
+      - name: Run statistical unit tests & API integration tests
+        run: |
+          python -m pytest tests/ -v
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "apps/web/package-lock.json"
+
+      - name: Install frontend dependencies
+        run: |
+          cd apps/web
+          npm ci
+
+      - name: Build Next.js production bundle
+        run: |
+          cd apps/web
+          npm run build

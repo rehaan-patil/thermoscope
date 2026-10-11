@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #07090e;
+  --foreground: #f1f5f9;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07090e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Subtle glowing accent utilities */
+.glow-cyan {
+  box-shadow: 0 0 25px -5px rgba(0, 229, 255, 0.2);
+}
+
+.glow-border {
+  border-color: rgba(0, 229, 255, 0.25);
+}
+
+.badge-pulse {
+  position: relative;
+}
+.badge-pulse::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: translateY(-50%) scale(0.9); opacity: 0.8; }
+  50% { transform: translateY(-50%) scale(1.6); opacity: 0; }
+  100% { transform: translateY(-50%) scale(0.9); opacity: 0; }
+}
