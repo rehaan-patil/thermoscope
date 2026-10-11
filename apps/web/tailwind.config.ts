@@ -9,31 +9,47 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#07090e",
+        background: "#000000",
         surface: {
-          DEFAULT: "#0d121c",
-          elevated: "#131a29",
-          card: "#0f1523",
-          border: "#1e293b",
+          DEFAULT: "#0a0a0a",
+          elevated: "#121212",
+          card: "#0d0d0d",
+          sidebar: "#050505",
+          border: "#1f1f1f",
         },
         brand: {
           cyan: "#00e5ff",
-          blue: "#0284c7",
-          glow: "rgba(0, 229, 255, 0.15)",
+          blue: "#3b82f6",
+          purple: "#8b5cf6",
+          glow: "rgba(0, 229, 255, 0.12)",
         },
         risk: {
           safe: "#10b981",
           warning: "#f59e0b",
           critical: "#ef4444",
-        }
+        },
       },
       fontFamily: {
-        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-        mono: ["JetBrains Mono", "Fira Code", "monospace"],
+        sans: [
+          "Inter",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+        ],
+        mono: [
+          "JetBrains Mono",
+          "SF Mono",
+          "Roboto Mono",
+          "Menlo",
+          "monospace",
+        ],
       },
-      animation: {
-        "pulse-subtle": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      }
+      boxShadow: {
+        command: "0 20px 40px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.08)",
+        card: "0 4px 20px -2px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05)",
+      },
     },
   },
   plugins: [],

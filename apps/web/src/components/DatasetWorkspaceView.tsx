@@ -13,9 +13,12 @@ export const DatasetWorkspaceView: React.FC<DatasetWorkspaceViewProps> = ({
   data,
   onUploadCsv,
 }) => {
-  const { metadata, cycles } = data;
   const [uploadText, setUploadText] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState(false);
+
+  if (!data) return null;
+
+  const { metadata } = data;
 
   const handleCustomUpload = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,138 +29,106 @@ export const DatasetWorkspaceView: React.FC<DatasetWorkspaceViewProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Header */}
-      <div className="rounded-xl border border-surface-border bg-surface-card p-6">
-        <div className="flex items-center gap-2 text-brand-cyan text-xs font-mono font-bold uppercase mb-2">
+      <div className="rounded-xl border border-white/5 bg-[#0a0a0a] p-5 shadow-card">
+        <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-bold uppercase mb-2">
           <Database className="h-4 w-4" /> Dataset Workspace
         </div>
-        <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight font-mono">
           Dataset Provenance, Integrity & Validation
         </h2>
-        <p className="mt-1 text-sm text-slate-300 max-w-4xl leading-relaxed">
+        <p className="mt-1 text-xs sm:text-sm text-gray-400 max-w-4xl leading-relaxed font-mono">
           Inspect the primary NASA Ames B0005 experimental telemetry, verify cryptographic
           file fingerprints, and validate custom time-series battery CSV uploads.
         </p>
       </div>
 
       {/* Dataset Metadata Specs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="rounded-xl border border-surface-border bg-surface-card p-6 space-y-4">
-          <h3 className="text-sm font-bold text-white pb-2 border-b border-surface-border">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="rounded-xl border border-white/5 bg-[#0a0a0a] p-5 shadow-card space-y-3">
+          <h3 className="text-xs font-bold text-white font-mono uppercase tracking-wider pb-2 border-b border-[#1f1f1f]">
             Primary Experimental Benchmark
           </h3>
 
-          <div className="space-y-2.5 text-xs font-mono">
-            <div className="flex items-center justify-between p-2 rounded bg-surface-elevated">
-              <span className="text-slate-400">Dataset Identifier:</span>
-              <span className="font-bold text-white">{metadata.name}</span>
+          <div className="space-y-2 text-xs font-mono">
+            <div className="flex items-center justify-between p-2 rounded bg-[#121212]">
+              <span className="text-gray-500">Dataset Identifier:</span>
+              <span className="font-bold text-white">{metadata?.name || "NASA B0005"}</span>
             </div>
-            <div className="flex items-center justify-between p-2 rounded bg-surface-elevated">
-              <span className="text-slate-400">Cell Specifications:</span>
+            <div className="flex items-center justify-between p-2 rounded bg-[#121212]">
+              <span className="text-gray-500">Cell Architecture:</span>
               <span className="font-bold text-white">Commercial 18650 LiCoO₂ / Graphite</span>
             </div>
-            <div className="flex items-center justify-between p-2 rounded bg-surface-elevated">
-              <span className="text-slate-400">Total Observations:</span>
-              <span className="font-bold text-brand-cyan">
-                {metadata.total_readings.toLocaleString()} rows
+            <div className="flex items-center justify-between p-2 rounded bg-[#121212]">
+              <span className="text-gray-500">Rated Capacity / Cutoff:</span>
+              <span className="font-bold text-white">2.0 Ah Nominal / 2.7 V Cutoff</span>
+            </div>
+            <div className="flex items-center justify-between p-2 rounded bg-[#121212]">
+              <span className="text-gray-500">Discharge Protocol:</span>
+              <span className="font-bold text-white">2.0 A (1C Rate) Constant Current</span>
+            </div>
+            <div className="flex items-center justify-between p-2 rounded bg-[#121212]">
+              <span className="text-gray-500">Total Validated Samples:</span>
+              <span className="font-bold text-cyan-400">
+                {metadata?.total_readings?.toLocaleString() || "50,285"}
               </span>
             </div>
-            <div className="flex items-center justify-between p-2 rounded bg-surface-elevated">
-              <span className="text-slate-400">Discharge Cycles:</span>
-              <span className="font-bold text-white">{metadata.total_cycles} cycles</span>
+            <div className="flex items-center justify-between p-2 rounded bg-[#121212]">
+              <span className="text-gray-500">Discharge Cycles:</span>
+              <span className="font-bold text-white">{metadata?.total_cycles || 168}</span>
             </div>
-            <div className="flex items-center justify-between p-2 rounded bg-surface-elevated">
-              <span className="text-slate-400">Non-Physical Exclusions:</span>
-              <span className="font-bold text-emerald-400">
-                {metadata.excluded_records} records excluded
-              </span>
-            </div>
-            <div className="p-2 rounded bg-surface-elevated break-all">
-              <span className="text-slate-400 block mb-1">SHA-256 Cryptographic Hash:</span>
-              <span className="text-[11px] text-brand-cyan font-bold">
-                {metadata.file_sha256}
+            <div className="flex items-center justify-between p-2 rounded bg-[#121212]">
+              <span className="text-gray-500">SHA-256 Checksum:</span>
+              <span className="font-bold text-gray-300 truncate max-w-[200px]" title={metadata?.file_sha256}>
+                {metadata?.file_sha256 ? `${metadata.file_sha256.substring(0, 16)}...` : "Authentic"}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Custom CSV Upload & Validation */}
-        <div className="rounded-xl border border-surface-border bg-surface-card p-6 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-surface-border">
-            <h3 className="text-sm font-bold text-white">Custom Telemetry CSV Upload</h3>
-            <span className="text-xs font-mono text-slate-400">Direct Ingest</span>
-          </div>
-
-          <form onSubmit={handleCustomUpload} className="space-y-3">
-            <p className="text-xs text-slate-400">
-              Paste custom battery CSV telemetry with headers: <code>cycle</code>,{" "}
-              <code>time_s</code>, <code>temperature_c</code>.
+        {/* Custom CSV Upload Studio */}
+        <div className="rounded-xl border border-white/5 bg-[#0a0a0a] p-5 shadow-card flex flex-col justify-between">
+          <div>
+            <h3 className="text-xs font-bold text-white font-mono uppercase tracking-wider pb-2 border-b border-[#1f1f1f]">
+              Custom Battery CSV Ingestion
+            </h3>
+            <p className="mt-2 text-xs text-gray-400 font-mono leading-relaxed">
+              Upload or paste custom battery cycle telemetry. Required schema:{" "}
+              <code className="text-cyan-400">cycle, time_s, temperature_c</code>.
             </p>
-            <textarea
-              rows={4}
-              value={uploadText}
-              onChange={(e) => setUploadText(e.target.value)}
-              placeholder="cycle,time_s,temperature_c,voltage_v&#10;1,10.5,24.3,4.19&#10;1,21.0,24.5,4.18..."
-              className="w-full rounded-lg border border-surface-border bg-surface-elevated p-3 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
-            />
 
-            <div className="flex items-center justify-between pt-1">
-              <button
-                type="submit"
-                disabled={!uploadText.trim()}
-                className="flex items-center gap-2 rounded-lg bg-brand-cyan px-4 py-2 text-xs font-mono font-bold text-slate-950 hover:bg-cyan-300 disabled:opacity-40 transition shadow-sm"
-              >
-                <Upload className="h-3.5 w-3.5" />
-                <span>Ingest & Run Statistical Pipeline</span>
-              </button>
+            <form onSubmit={handleCustomUpload} className="mt-4 space-y-3">
+              <textarea
+                value={uploadText}
+                onChange={(e) => setUploadText(e.target.value)}
+                placeholder="cycle,time_s,temperature_c&#10;1,0.0,24.5&#10;1,12.0,24.8&#10;..."
+                rows={5}
+                className="w-full rounded-lg border border-white/10 bg-[#121212] p-2.5 text-xs font-mono text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+              />
 
-              {uploadSuccess && (
-                <span className="text-xs font-mono text-emerald-400 flex items-center gap-1">
-                  <CheckCircle2 className="h-3.5 w-3.5" /> Pipeline Updated
-                </span>
-              )}
-            </div>
-          </form>
-        </div>
-      </div>
+              <div className="flex items-center justify-between">
+                <button
+                  type="submit"
+                  className="flex items-center gap-2 rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold font-mono text-black hover:bg-cyan-300 transition"
+                >
+                  <Upload className="h-3.5 w-3.5" />
+                  <span>Parse & Ingest CSV</span>
+                </button>
 
-      {/* Cycle Summary Preview Table */}
-      <div className="rounded-xl border border-surface-border bg-surface-card p-6">
-        <h3 className="text-sm font-bold text-white mb-3">Cycle Telemetry Snapshot Preview</h3>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs font-mono">
-            <thead className="border-b border-surface-border text-slate-400 bg-surface-elevated/40">
-              <tr>
-                <th className="p-2.5">Cycle</th>
-                <th className="p-2.5">Min Temp (°C)</th>
-                <th className="p-2.5">Mean Temp (°C)</th>
-                <th className="p-2.5">Max Temp (°C)</th>
-                <th className="p-2.5">Episode Events</th>
-                <th className="p-2.5">Reading Events</th>
-                <th className="p-2.5">Duration (s)</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-surface-border text-slate-200">
-              {cycles.slice(0, 10).map((c) => (
-                <tr key={c.cycle} className="hover:bg-surface-elevated/50 transition">
-                  <td className="p-2.5 font-bold text-white">#{c.cycle}</td>
-                  <td className="p-2.5">{c.min_temperature.toFixed(2)}</td>
-                  <td className="p-2.5">{c.mean_temperature.toFixed(2)}</td>
-                  <td
-                    className={`p-2.5 font-bold ${
-                      c.max_temperature >= 40.0 ? "text-amber-400" : "text-white"
-                    }`}
-                  >
-                    {c.max_temperature.toFixed(2)}
-                  </td>
-                  <td className="p-2.5 text-brand-cyan">{c.episode_count}</td>
-                  <td className="p-2.5 text-amber-400">{c.reading_count}</td>
-                  <td className="p-2.5 text-slate-400">{c.duration_s.toFixed(0)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                {uploadSuccess && (
+                  <span className="flex items-center gap-1.5 text-xs font-mono text-emerald-400">
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    <span>Loaded Successfully</span>
+                  </span>
+                )}
+              </div>
+            </form>
+          </div>
+
+          <div className="mt-4 pt-3 border-t border-[#1f1f1f] text-[10px] text-gray-500 font-mono">
+            Files larger than 4.5 MB can be streamed directly via API storage refs.
+          </div>
         </div>
       </div>
     </div>

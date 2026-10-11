@@ -130,13 +130,13 @@ export const GuidedJudgeTour: React.FC<GuidedJudgeTourProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl rounded-2xl border border-cyan-500/30 bg-surface-card p-6 sm:p-8 shadow-2xl glow-cyan">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl rounded-2xl border border-white/10 bg-[#0d0d0d] p-6 sm:p-8 shadow-2xl shadow-black/90">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-surface-border">
+        <div className="flex items-center justify-between pb-4 border-b border-[#1f1f1f]">
           <div className="flex items-center gap-2.5">
-            <div className="rounded-lg bg-cyan-500/10 p-2 border border-cyan-500/30">
-              <Sparkles className="h-5 w-5 text-brand-cyan" />
+            <div className="rounded-lg bg-[#141414] p-2 border border-[#222222]">
+              <Sparkles className="h-5 w-5 text-cyan-400" />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -162,33 +162,33 @@ export const GuidedJudgeTour: React.FC<GuidedJudgeTourProps> = ({
 
         {/* Content Body */}
         <div className="my-6 space-y-4">
-          <div className="rounded-xl border border-surface-border bg-surface-elevated/70 p-4">
-            <p className="text-sm font-semibold text-slate-100">{current.summary}</p>
-            <p className="mt-2 text-xs sm:text-sm text-slate-400 leading-relaxed">
+          <div className="rounded-xl border border-white/5 bg-[#121212] p-4">
+            <p className="text-sm font-semibold text-white">{current.summary}</p>
+            <p className="mt-2 text-xs sm:text-sm text-gray-400 leading-relaxed">
               {current.detail}
             </p>
           </div>
 
-          <div className="flex items-center justify-between rounded-lg border border-cyan-500/20 bg-brand-cyan/5 px-4 py-3 text-xs font-mono">
-            <span className="text-slate-400">Key Scientific Metric:</span>
-            <span className="font-bold text-brand-cyan">{current.keyMetric}</span>
+          <div className="flex items-center justify-between rounded-lg border border-cyan-500/20 bg-cyan-950/20 px-4 py-3 text-xs font-mono">
+            <span className="text-gray-400">Key Scientific Metric:</span>
+            <span className="font-bold text-cyan-400">{current.keyMetric}</span>
           </div>
         </div>
 
         {/* Navigation & Actions */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-surface-border">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-[#1f1f1f]">
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
               onClick={() => setCurrentStep((prev) => Math.max(0, prev - 1))}
               disabled={currentStep === 0}
-              className="flex items-center gap-1 rounded-lg border border-surface-border px-3 py-2 text-xs font-mono text-slate-300 hover:bg-surface-elevated disabled:opacity-30 disabled:hover:bg-transparent transition"
+              className="flex items-center gap-1 rounded-lg border border-white/10 px-3 py-2 text-xs font-mono text-gray-300 hover:bg-[#1a1a1a] disabled:opacity-30 disabled:hover:bg-transparent transition"
             >
               <ChevronLeft className="h-4 w-4" /> Prev
             </button>
             <button
               onClick={() => setCurrentStep((prev) => Math.min(steps.length - 1, prev + 1))}
               disabled={currentStep === steps.length - 1}
-              className="flex items-center gap-1 rounded-lg border border-surface-border px-3 py-2 text-xs font-mono text-slate-300 hover:bg-surface-elevated disabled:opacity-30 disabled:hover:bg-transparent transition"
+              className="flex items-center gap-1 rounded-lg border border-white/10 px-3 py-2 text-xs font-mono text-gray-300 hover:bg-[#1a1a1a] disabled:opacity-30 disabled:hover:bg-transparent transition"
             >
               Next <ChevronRight className="h-4 w-4" />
             </button>
@@ -196,7 +196,7 @@ export const GuidedJudgeTour: React.FC<GuidedJudgeTourProps> = ({
 
           <button
             onClick={handleAction}
-            className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-brand-cyan px-4 py-2 text-xs font-bold font-mono text-slate-950 hover:bg-cyan-300 transition shadow-md"
+            className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-cyan-400 px-4 py-2 text-xs font-bold font-mono text-black hover:bg-cyan-300 transition shadow-md"
           >
             <span>{current.actionText}</span>
             <ChevronRight className="h-4 w-4" />
