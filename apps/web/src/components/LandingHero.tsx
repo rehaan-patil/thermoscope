@@ -2,16 +2,12 @@
 
 import React from "react";
 import {
-  Flame,
   Sparkles,
   ArrowRight,
-  Database,
-  BarChart3,
   Cpu,
   BookOpen,
   FileCheck,
   CheckCircle2,
-  AlertTriangle,
   Sliders,
 } from "lucide-react";
 

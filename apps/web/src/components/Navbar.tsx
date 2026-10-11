@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Flame, ShieldAlert, Cpu, Sparkles, BookOpen, Sliders } from "lucide-react";
+import { Flame, Cpu, Sparkles, BookOpen } from "lucide-react";
 
 interface NavbarProps {
   activeTab: string;
@@ -103,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* GitHub link */}
           <a
-            href="https://github.com/Rehaan5823/thermoscope"
+            href="https://github.com/rehaan-patil/thermoscope"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg border border-surface-border p-2 text-slate-400 hover:text-white hover:border-slate-600 transition"

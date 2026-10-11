@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { FullAnalysisResponse, SensitivityPoint } from "@/types/thermoscope";
-import { Sliders, Activity, Info, AlertTriangle, ArrowRight } from "lucide-react";
+import React from "react";
+import { FullAnalysisResponse } from "@/types/thermoscope";
+import { Sliders } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -27,8 +27,6 @@ export const ThresholdSensitivityView: React.FC<ThresholdSensitivityViewProps> =
 }) => {
   const { threshold_sensitivity } = data;
   const { points, narrative, disclaimer } = threshold_sensitivity;
-
-  const [hoveredPoint, setHoveredPoint] = useState<SensitivityPoint | null>(null);
 
   const chartData = points.map((p) => ({
     threshold: `${p.threshold_c}°C`,

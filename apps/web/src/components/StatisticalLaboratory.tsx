@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { FullAnalysisResponse } from "@/types/thermoscope";
 import { calculateProbabilityApi } from "@/lib/api";
-import { Activity, Calculator, Check, Info, TrendingUp, Clock } from "lucide-react";
+import { Activity, Calculator, Check, Clock } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -22,13 +22,12 @@ interface StatisticalLaboratoryProps {
 }
 
 export const StatisticalLaboratory: React.FC<StatisticalLaboratoryProps> = ({ data }) => {
-  const { poisson, exponential, cycles } = data;
+  const { poisson, exponential } = data;
 
   // Interactive probability calculator state
   const [calcLambda, setCalcLambda] = useState<number>(poisson.lambda_rate);
   const [calcK, setCalcK] = useState<number>(3);
   const [liveProbs, setLiveProbs] = useState<Record<string, number>>(poisson.probabilities);
-  const [isCalculating, setIsCalculating] = useState<boolean>(false);
 
   // Frequency comparison chart data (Bins: 0, 1, 2, 3, 4+)
   const freqData = [
@@ -62,12 +61,11 @@ export const StatisticalLaboratory: React.FC<StatisticalLaboratoryProps> = ({ da
   const handleRecalculateProbs = async (newLam: number, newK: number) => {
     setCalcLambda(newLam);
     setCalcK(newK);
-    setIsCalculating(true);
     try {
       const p = await calculateProbabilityApi(newLam, newK);
       setLiveProbs(p);
-    } finally {
-      setIsCalculating(false);
+    } catch (e) {
+      console.error(e);
     }
   };
 

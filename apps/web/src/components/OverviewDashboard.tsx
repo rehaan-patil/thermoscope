@@ -8,11 +8,8 @@ import {
   AlertTriangle,
   Clock,
   Sliders,
-  TrendingUp,
   ShieldCheck,
   ShieldAlert,
-  HelpCircle,
-  FileText,
 } from "lucide-react";
 import {
   LineChart,
@@ -35,7 +32,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
   setActiveTab,
   setMode,
 }) => {
-  const { poisson, exponential, decision_center, cycles, options, metadata } = data;
+  const { poisson, exponential, decision_center, cycles, options } = data;
 
   const isHighRisk = decision_center.overall_classification === "HIGH RISK";
   const isWarning = decision_center.overall_classification === "WARNING";

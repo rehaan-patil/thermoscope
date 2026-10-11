@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { BookOpen, ExternalLink, ShieldCheck, Flame, Cpu } from "lucide-react";
+import { BookOpen, ExternalLink } from "lucide-react";
 
 export const MethodologyView: React.FC = () => {
   return (

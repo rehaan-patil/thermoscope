@@ -1,15 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { FullAnalysisResponse, EngineeringAlert } from "@/types/thermoscope";
+import { FullAnalysisResponse } from "@/types/thermoscope";
 import {
   ShieldAlert,
-  ShieldCheck,
   AlertTriangle,
   ChevronDown,
   ChevronUp,
-  Info,
-  Clock,
   Search,
 } from "lucide-react";
 
@@ -18,8 +15,8 @@ interface DecisionCenterViewProps {
 }
 
 export const DecisionCenterView: React.FC<DecisionCenterViewProps> = ({ data }) => {
-  const { decision_center, options } = data;
-  const { alerts, alert_counts, overall_classification, disclaimer } = decision_center;
+  const { decision_center } = data;
+  const { alerts, alert_counts, disclaimer } = decision_center;
 
   const [severityFilter, setSeverityFilter] = useState<string>("ALL");
   const [expandedAlertId, setExpandedAlertId] = useState<string | null>(null);

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { FullAnalysisResponse } from "@/types/thermoscope";
-import { Sliders, ArrowRight, AlertTriangle, CheckCircle2, Info } from "lucide-react";
+import { Sliders } from "lucide-react";
 
 interface EventSemanticsExplorerProps {
   data: FullAnalysisResponse;
@@ -15,7 +15,7 @@ export const EventSemanticsExplorer: React.FC<EventSemanticsExplorerProps> = ({
   mode,
   setMode,
 }) => {
-  const { poisson, exponential, decision_center, cycles, options } = data;
+  const { poisson, cycles } = data;
 
   // Compute total readings > 40C vs total episodes across cycles
   const totalReadingsExceeded = cycles.reduce((acc, c) => acc + c.reading_count, 0);

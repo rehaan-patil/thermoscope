@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FullAnalysisResponse } from "@/types/thermoscope";
-import { Database, FileCheck, Upload, AlertCircle, CheckCircle2, Shield } from "lucide-react";
+import { Database, Upload, CheckCircle2 } from "lucide-react";
 
 interface DatasetWorkspaceViewProps {
   data: FullAnalysisResponse;

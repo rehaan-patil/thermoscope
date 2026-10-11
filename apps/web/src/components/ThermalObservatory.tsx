@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FullAnalysisResponse, CycleDataPoint } from "@/types/thermoscope";
-import { Flame, Eye, Thermometer, Layers, Clock } from "lucide-react";
+import { Eye } from "lucide-react";
 import {
   AreaChart,
   Area,

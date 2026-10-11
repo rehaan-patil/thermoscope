@@ -2,7 +2,7 @@
 
 import React from "react";
 import { FullAnalysisResponse } from "@/types/thermoscope";
-import { CheckCircle2, AlertTriangle, HelpCircle, Shield, ArrowRight, Activity } from "lucide-react";
+import { Shield } from "lucide-react";
 
 interface ModelAdequacyGuardrailProps {
   data: FullAnalysisResponse;

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { FullAnalysisResponse } from "@/types/thermoscope";
-import { TrendingUp, AlertTriangle, ArrowRight, ShieldCheck, Flame } from "lucide-react";
+import { TrendingUp, AlertTriangle, ShieldCheck } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -69,6 +69,13 @@ export const AgeingAnalysisView: React.FC<AgeingAnalysisViewProps> = ({ data }) 
           <div>
             <h3 className="text-sm font-bold text-white font-mono">{conclusion}</h3>
             <p className="text-xs text-slate-300 mt-1 max-w-2xl">{recommendation}</p>
+            {shift_evidence.length > 0 && (
+              <div className="mt-2 text-xs text-amber-300/90 font-mono">
+                {shift_evidence.map((ev, i) => (
+                  <div key={i}>• {ev}</div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
