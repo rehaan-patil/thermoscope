@@ -7,10 +7,17 @@
 [![Next.js: 14](https://img.shields.io/badge/Next.js-14-black.svg?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![TypeScript: Strict](https://img.shields.io/badge/TypeScript-Strict-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![CI Status](https://img.shields.io/badge/CI-Passing-brightgreen.svg)]()
+[![Production: Live](https://img.shields.io/badge/Vercel-Live%20Deployment-00e5ff.svg)](https://web-bice-eight-erjjvn95sh.vercel.app)
 
 ThermoScope is an open-source, research-grade battery thermal analytics and statistical engineering decision-support platform. It investigates how abnormal thermal-event behavior evolves over the observed lifecycle of lithium-ion cells and rigorously evaluates how reliably **Poisson** and **Exponential** point-process models describe that behavior.
 
 Rather than presenting black-box AI scores or static charts, ThermoScope exposes the empirical evidence supporting each statistical conclusion, diagnoses when classical distribution assumptions break down due to electrochemical aging, and produces fully auditable engineering alerts.
+
+### 🌐 Live Production Deployments
+* **Production Web Application:** [https://web-bice-eight-erjjvn95sh.vercel.app](https://web-bice-eight-erjjvn95sh.vercel.app)
+* **Production FastAPI Statistical Engine:** [https://api-gold-gamma-21.vercel.app](https://api-gold-gamma-21.vercel.app)
+* **Interactive API Documentation (Swagger / OpenAPI):** [https://api-gold-gamma-21.vercel.app/docs](https://api-gold-gamma-21.vercel.app/docs)
+* **Public GitHub Repository:** [https://github.com/rehaan-patil/thermoscope](https://github.com/rehaan-patil/thermoscope)
 
 ---
 
@@ -105,7 +112,7 @@ thermoscope/
 ### 1. Run Automated Statistical Tests
 ```bash
 # Clone the repository
-git clone https://github.com/Rehaan5823/thermoscope.git
+git clone https://github.com/rehaan-patil/thermoscope.git
 cd thermoscope
 
 # Run backend tests
